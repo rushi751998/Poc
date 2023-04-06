@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+{% load static %}
+
+
+{% block title %}Error!!!{% endblock %}
+{% block extra_head_extended %}
+<style>
+    .error{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 50px;
+    }
+    h1{
+        color: black;
+    }
+</style>
+{% endblock %}
+
+{% block videos %}
+<div class="error">
+    <h1>
+        Video not found
+    </h1>
+</div>
+
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}KPI Dashboard{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/kpi_dashboard1/kpi_dashboard6.css'  %}">
+<style>
+    .error{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 50px;
+    }
+</style>
+
+
+{% block extra_head_extended %}
+{% endblock %}
+{% endblock %}
+
+{% block tr_rec %}
+<a href="{% url 'videos' %}"><p>> Recordings</p></a>
+<a href="{% url 'videos2' %}"><p>> Processed Video</p></a>
+<a href="{% url 'kpi_dashboard' %}"><p>> KPI Dashboard</p></a>
+{% block tr_kpi %}
+{% endblock %}
+{% endblock %}
+
+{% block dash_button %}
+<a href="{% url 'dashboard_filter' %}"><button type="submit">Dashboard</button> </a>
+{% endblock %}
+
+{% block body %}
+<div class="nav_bg">
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link"  href="operation">Operation</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="customer_service">Customer Service</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="primer_customer">Primer Customer</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="security">Security & Safety</a>
+        </li>
+    </ul>
+
+    <div class="dropdown">
+        <form action="" method="post">
+            {% csrf_token %}
+            <label>
+                <h6>Period : </h6>
+            </label>
+            <select  name="time">
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+            </select>
+            <button type="submit">Show Results</button>
+        </form>
+
+    </div>
+
+</div>
+
+{% block kpi %}
+
+<div class="error">
+    <h1>
+        Select Date and Period
+    </h1>
+</div>
+
+{% endblock %}
+
+
+{% endblock %}

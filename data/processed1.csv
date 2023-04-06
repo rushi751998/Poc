@@ -1,0 +1,54 @@
+Frame Count,Customer ID,Spend Time,Gender,Race,Emotion,Age,Suspecious
+1089,0,43.56,Man,indian,neutral,26,1
+437,1,17.48,Man,indian,angry,29,1
+427,2,17.08,Man,indian,angry,29,1
+424,3,16.96,Man,indian,angry,29,1
+392,4,15.68,Man,indian,angry,29,1
+384,5,15.36,Man,indian,angry,29,1
+381,6,15.24,Man,indian,angry,29,1
+380,7,15.2,Man,indian,angry,29,1
+375,8,15,Man,indian,angry,29,1
+374,9,14.96,Man,indian,angry,29,1
+339,10,13.56,Man,indian,angry,29,1
+337,11,13.48,Man,indian,angry,29,1
+334,12,13.36,Man,indian,angry,29,1
+333,13,13.32,Man,indian,angry,29,1
+332,14,13.28,Man,indian,angry,29,1
+325,15,13,Man,indian,angry,29,1
+314,16,12.56,Man,indian,angry,29,1
+311,17,12.44,Man,indian,angry,29,1
+310,18,12.4,Man,indian,angry,29,1
+275,19,11,Man,indian,angry,28,0
+273,20,10.92,Man,indian,angry,30,0
+231,21,9.24,Man,indian,angry,30,0
+221,22,8.84,Man,indian,angry,30,0
+202,23,8.08,Man,indian,angry,30,0
+200,24,8,Man,indian,angry,30,0
+199,25,7.96,Man,indian,angry,30,0
+192,26,7.68,Man,indian,angry,30,0
+191,27,7.64,Man,indian,angry,30,0
+170,28,6.8,Man,indian,angry,30,0
+168,29,6.72,Man,indian,angry,30,0
+156,30,6.24,Man,indian,sad,29,0
+152,31,6.08,Man,indian,sad,29,0
+145,32,5.8,Man,indian,sad,30,0
+139,33,5.56,Man,indian,sad,30,0
+131,34,5.24,Man,indian,sad,29,0
+129,35,5.16,Man,indian,sad,28,0
+127,36,5.08,Man,indian,sad,28,0
+104,37,4.16,Man,latino hispanic,sad,28,0
+102,38,4.08,Man,latino hispanic,sad,29,0
+91,39,3.64,Man,latino hispanic,sad,26,0
+86,40,3.44,Man,latino hispanic,sad,26,0
+81,41,3.24,Man,latino hispanic,sad,26,0
+77,42,3.08,Man,latino hispanic,sad,26,0
+74,43,2.96,Man,latino hispanic,sad,26,0
+34,44,1.36,Man,indian,sad,26,0
+24,45,0.96,Man,indian,sad,26,0
+21,46,0.84,Man,indian,sad,26,0
+15,47,0.6,Man,indian,sad,26,0
+14,48,0.56,Man,indian,sad,26,0
+9,49,0.36,Man,indian,sad,26,0
+8,50,0.32,Man,indian,sad,26,0
+2,51,0.08,Man,indian,sad,26,0
+1,52,0.04,Man,indian,angry,28,0

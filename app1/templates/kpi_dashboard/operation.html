@@ -1,0 +1,360 @@
+{% extends 'kpi_dashboard/kpi_dashboard.html' %}
+{% load static %}
+
+{% block title %}Operatio KPI{% endblock %}
+
+{% block extra_head_extended %}
+<link rel="stylesheet" href="{% static 'css/kpi_dashboard1/kpi_common.css'  %}">
+
+<style>
+  .container1,.container2 {
+    display: flex;
+    justify-content: space-evenly;
+    width: 900px;
+    margin: 30px 0px;
+      }
+
+  .left .box .percent svg circle:nth-child(2) {
+    stroke: #ff2e1f;
+  }
+
+  .right .box .percent svg circle:nth-child(2) {
+    stroke: #03a7ff;
+  }
+  .text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
+{% endblock %}
+
+{% block tr_kpi %}
+<a href="{% url 'operation' %}"><p>> Operation</p></a>
+{% endblock %}
+
+
+{% block kpi %}
+
+<div class="main">
+  <div class="heading">
+    <h1> {{kpi | capfirst}}</h1>
+  </div>
+
+  <div class="charts">
+
+
+    <div class="chart1">
+      <h3>Daywise Footfall</h3>
+      <canvas id="total_footfall"></canvas>
+    </div>
+    <div class="container2">
+      <div class="chart1" \>
+        <h3> Enquire Count</h3>
+        <canvas id="audio_reults" height="100px" width="100px" ></canvas>
+      </div>
+    
+    <div class="chart1" style="margin-left: 80px;">
+      <h3> Daily Transactions($)</h3>
+      <canvas id="n_transactions" height="100px" width="100px"></canvas>
+    </div>
+  </div>
+
+    <div class="container1">
+      <div class="left">
+        <div class="box">
+          <h2 class="text">Avg. Time Spend</h2>
+
+          <div class="percent">
+            <svg>
+              <circle cx="70" cy="70" r="70"></circle>
+              <circle class="avgstay_circle" cx="70" cy="70" r="70"></circle>
+            </svg>
+            <div class="number">
+              <h2 id="cv">{{avg_stay}}Sec</h2>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="right" >
+
+          <h2 class="text">Time Spend Analysis </h2>
+          <canvas id="uncap_footfall" height="250px" width="600px"></canvas>     
+
+      </div>
+
+
+
+
+
+
+    </div>
+
+    <div class="buttons">
+      <form action="" method="post">
+        {% csrf_token %}
+        <button type="submit" value="Email_report" name="emailbutton">Email Report </button>
+        <button type="submit" value="pdf_report" name="pdflbutton">Export PDF </button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.querySelector(".avgstay_circle").style.strokeDashoffset =
+      440 - (440 * 30) / 100;
+  </script>
+
+
+  <script>
+    var ctx = document.getElementById('total_footfall').getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: [{% for i in date %}  '{{ i }}',  {% endfor %}],
+    datasets: [{
+      label: 'Footfalls Captured',
+      data: [{% for i in foot_fall %}  {{ i }}, {% endfor %}],
+      backgroundColor: 'rgba(54, 162, 235, 0.8)',
+      borderColor: 'rgba(54, 162, 235, 0.8)',
+          tenssion: 0.4
+            },
+            {
+      label: 'Footfall not Captured',
+      data: [{% for i in uncap_foot %}  {{ i }}, {% endfor %}],
+      backgroundColor: 'rgba(255, 99, 132, 0.8)',
+      borderColor: 'rgba(555, 99, 132, 1)',
+          tenssion: 0.4
+            }]
+        },
+    options: {
+      scales: {
+        x: {
+          beginAtZero: true,
+          title:{
+            display:true,
+            text: 'Date'
+          }
+        },
+        y: {
+          beginAtZero: true,
+          title:{
+            display:true,
+            text: 'Footfalls'
+          }
+        }
+      }
+    }
+    });
+  </script>
+
+  <script>
+    var ctx = document.getElementById('audio_reults').getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: [{% for i in tags_lable %}  '{{ i }}',  {% endfor %}],
+    datasets: [ 
+            {
+              label: 'Enquire Count',
+              data: [{% for i in tags_value %}  {{ i }}, {% endfor %}],
+              backgroundColor: [
+      'rgba(255, 99, 132, 0.8)',
+      'rgba(54, 162, 235, 0.8)',
+      'rgba(255, 206, 86, 0.8)',
+      'rgba(75, 192, 192, 0.8)',
+      'rgba(153, 102, 255, 0.8)',
+      'rgba(255, 159, 64, 0.8)',
+      'rgba(240, 120, 50, 0.8)',
+    ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)',
+        'rgba(240, 120, 50, 1)',
+
+      ],
+                  borderWidth: 2
+                    },
+            ]
+        },
+        options: {
+          scales: {
+            x: {
+              beginAtZero: true,
+              title:{
+                display:true,
+                text: 'Date'
+              }
+            },
+            y: {
+              beginAtZero: true,
+              title:{
+                display:true,
+                text: 'Footfalls'
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              display: true,
+                labels: {
+                generateLabels: (chart) => {
+                  console.log(chart)
+                  return chart.data.labels.map(
+                    (label, index) => ({
+                      text: label,
+                      strokeStyle: chart.data.datasets[0].borderColor[index],
+                      fillStyle: chart.data.datasets[0].borderColor[index],
+                    })
+                  )
+                }
+              }
+            }
+          }
+        }
+      });
+  </script>
+
+
+
+  <script>
+    var ctx = document.getElementById('n_transactions').getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: [{% for i in date %}  '{{ i }}',  {% endfor %}],
+    datasets: [ 
+            {
+              label: 'Volume of Transactions',
+              data: [{% for i in transactions_Volume %}  {{ i }}, {% endfor %}],
+              backgroundColor: [
+      'rgba(255, 99, 132, 0.8)',
+      'rgba(54, 162, 235, 0.8)',
+      'rgba(255, 206, 86, 0.8)',
+      'rgba(75, 192, 192, 0.8)',
+      'rgba(153, 102, 255, 0.8)',
+      'rgba(255, 159, 64, 0.8)',
+      'rgba(240, 120, 50, 0.8)',
+    ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)',
+        'rgba(240, 120, 50, 1)',
+
+      ],
+                  borderWidth: 2
+                    },
+            ]
+        },
+        options: {
+          scales: {
+            x: {
+              beginAtZero: true,
+              title:{
+                display:true,
+                text: 'Date'
+              }
+            },
+            y: {
+              beginAtZero: true,
+              title:{
+                display:true,
+                text: 'Volume'
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              display: true,
+                labels: {
+                generateLabels: (chart) => {
+                  console.log(chart)
+                  return chart.data.labels.map(
+                    (label, index) => ({
+                      text: label,
+                      strokeStyle: chart.data.datasets[0].borderColor[index],
+                      fillStyle: chart.data.datasets[0].borderColor[index],
+                    })
+                  )
+                }
+              }
+            }
+          }
+        }
+      });
+  </script>
+
+
+
+  <script>
+    var ctx = document.getElementById('uncap_footfall').getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: [{% for i in date %}  '{{ i }}',  {% endfor %}],
+    datasets: [{
+      label: 'Avg stay ',
+      data: [{% for i in avg_stay_bydate %}  {{ i }}, {% endfor %}],
+      backgroundColor: [
+        'rgba(54, 162, 235, 0.8)',
+
+      ],
+        borderColor: [
+          'rgba(54, 162, 235, 1)',
+
+
+        ],
+          borderWidth: 3
+        }]
+    },
+    options: {
+      scales: {
+        x: {
+          beginAtZero: true,
+          title:{
+            display:true,
+            text: 'Date'
+          }
+        },
+        y: {
+          beginAtZero: true,
+          title:{
+            display:true,
+            text: 'Seconds'
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          display: false,
+            labels: {
+            generateLabels: (chart) => {
+              console.log(chart)
+              return chart.data.labels.map(
+                (label, index) => ({
+                  text: label,
+                  strokeStyle: chart.data.datasets[0].borderColor[index],
+                  fillStyle: chart.data.datasets[0].borderColor[index],
+                })
+              )
+            }
+          }
+        }
+      }
+    }
+  });
+  </script>
+
+
+
+
+  {% endblock %}

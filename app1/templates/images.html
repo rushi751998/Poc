@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Images{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/images.css'  %}">
+{% endblock %}
+
+{% block body %}
+
+
+{% for i in db_points %}
+<div class="image_cont">
+    <div class="image">
+        <img src="/media/{{i.image}}" alt="">
+        <h1>{{i.face_id}}</h1>
+    </div>
+    
+    {% endfor %}
+</div>
+
+
+{% endblock %}

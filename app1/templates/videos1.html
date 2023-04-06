@@ -1,0 +1,82 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}Recordings{% endblock %}
+
+{% block extra_head_extended %}
+<link rel="stylesheet" href="{% static 'css/video.css'  %}">
+{% endblock %}
+{% block tr_rec %}
+<a href="{% url 'videos' %}"><p>> Recordings</p></a>
+{% block tr_pro_rec %}
+{% endblock %}
+{% endblock %}
+
+
+
+{% block videos %}
+<!-- <div class="heading">
+    <h1>
+        Your Recordings
+    </h1>
+</div> -->
+
+{% block buttons %}
+<div class="buttons">
+    <form action="videos2"><button type="submit" acti class="btn btn-primary btn-lg">Process Video</button></form>
+</div>
+
+
+{% endblock %}
+
+<div class="video_container">
+    <div class="video_all">
+        {% for x in all %}
+        <div class="checkbox">
+            {% block vid %}
+            <div class="input-group mb-3">
+                <div class="input-group-text">
+                    <input id="checkbox" class="form-check-input mt-0" type="checkbox" value=""
+                        aria-label="Checkbox for following text input">
+
+
+                    <div class="video_specifications">
+                        <div class="info">
+                            <h3 id="caption" class="text-center mt-2 mb-2">Date : {{date}}</h3>
+
+                        </div>
+
+                        <div class="videos">
+
+
+                            <video class="embed-responsive embed-responsive-16by9" controls="controls">
+                                <source src="{{x.video.url}}" type="video/mp4" />
+                            </video>
+
+                            {% block video2 %}
+                            {% endblock %}
+
+                        </div>
+
+                        {% endblock %}
+
+
+                        {% endfor %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="button_container">
+
+
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/video.js'  %}"> </script>
+{% endblock %}

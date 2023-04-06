@@ -1,0 +1,7 @@
+sk-video
+scikit-video==1.1.11
+ffmpeg==1.4
+ffprobe==0.5
+tensorflow
+deepface
+keras

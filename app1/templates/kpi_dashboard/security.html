@@ -1,0 +1,225 @@
+{% extends 'kpi_dashboard/kpi_dashboard.html' %}
+{% load static %}
+
+{% block title %}Security & Safety{% endblock %}
+
+
+
+{% block extra_head_extended %}
+<link rel="stylesheet" href="{% static 'css/kpi_dashboard1/kpi_common.css'  %}">
+
+<style>
+  .buttons{
+
+    display: flex;
+    justify-content: center;
+  }
+</style>
+
+
+{% endblock %}
+{% block tr_kpi %}
+<a href="{% url 'security' %}"><p>> Security & Safety</p></a>
+{% endblock %}
+
+
+
+
+{% block kpi %}
+
+<div class="main">
+  <div class="heading">
+    <h1> {{kpi | capfirst}}</h1>
+  </div>
+
+  <div class="charts">
+
+<div class="container2">
+  <div class="chart1" >
+    <h3>Daily Suspicious Activity Monitoring</h3>
+    <canvas id="suspicious_footfall"></canvas>
+  </div>
+  <div class="chart1"\>
+    <h3>Frequent Visits</h3>
+    <canvas id="frequent_visit"></canvas>
+  </div>
+</div>
+</div>
+</div>
+<div class="buttons">
+  <form action="" method="post">
+    {% csrf_token %}
+    <button type="submit" value="Email_report" name="emailbutton">Email Report </button>
+    <button type="submit" value="pdf_report" name="pdflbutton">Export PDF </button>
+  </form>
+</div>
+</div>
+
+
+
+    
+
+  
+
+
+
+
+
+<script>
+    var ctx = document.getElementById('suspicious_footfall').getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: [{% for i in date_suspecious %}  '{{ i }}',  {% endfor %}],
+    datasets: [{
+      label: 'Suspicious footfall',
+      data: [{% for i in suspicious_footfall %}  {{ i }}, {% endfor %}],
+      backgroundColor: 'rgba(255, 206, 86, 0.8)',
+      borderColor: 'rgba(255, 206, 86, 1)',
+          tenssion: 0.4
+            },
+            {
+      label: 'Number of Customers',
+      data: [{% for i in No_cutomers %}  {{ i }}, {% endfor %}],
+      backgroundColor: 'rgba(0, 99, 132, 0.8)',
+      borderColor: 'rgba(0, 99, 132, 1)',
+          tenssion: 0.4
+            }]
+        },
+    options: {
+    scales: {
+      x: {
+        beginAtZero: true,
+        title:{
+          display:true,
+          text: 'Date'
+        }
+      },
+      y: {
+        beginAtZero: true,
+        title:{
+          display:true,
+          text: 'Customers'
+        }
+      }
+    },
+  }
+  });
+  </script>
+
+<script>
+    var ctx = document.getElementById('frequent_visit').getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: [{% for i in date %}  '{{ i }}',  {% endfor %}],
+    datasets: [{
+      label: 'Frequent Visit',
+      data: [{% for i in frequent_visit %}  {{ i }}, {% endfor %}],
+      backgroundColor: 'rgba(75, 192, 192, 0.8)',
+      borderColor: 'rgba(75, 192, 192, 1)',
+          tenssion: 0.4
+            },
+            {
+      label: 'Number of Customers',
+      data: [{% for i in No_cutomers %}  {{ i }}, {% endfor %}],
+      backgroundColor: 'rgba(240, 120, 50, 0.8)', 
+      borderColor: 'rgba(240, 120, 50, 1)',
+          tenssion: 0.4
+            }]
+        },
+    options: {
+    scales: {
+      x: {
+        beginAtZero: true,
+        title:{
+          display:true,
+          text: 'Date'
+        }
+      },
+      y: {
+        beginAtZero: true,
+        title:{
+          display:true,
+          text: 'Customers'
+        }
+      }
+    },
+  }
+  });
+  </script>
+
+<script>
+    var ctx = document.getElementById('transactions_in_sysytem').getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: [{% for i in date %}  '{{ i }}',  {% endfor %}],
+    datasets: [{
+      label: 'Frequent Visit',
+      data: [{% for i in transaction_in_system %}  {{ i }}, {% endfor %}],
+      backgroundColor: 'rgba(255, 99, 132, 0.8)',
+      borderColor: 'rgba(255, 99, 132, 1)',
+          tenssion: 0.4
+            },
+            {
+      label: 'Number of Customers',
+      data: [{% for i in No_cutomers %}  {{ i }}, {% endfor %}],
+      backgroundColor: 'rgba(0, 99, 132, 0.8)',
+      borderColor: 'rgba(0, 99, 132, 1)',
+          tenssion: 0.4
+            }]
+        },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+    });
+  </script>
+<script>
+    var ctx = document.getElementById('transactions_Volume').getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: [{% for i in date %}  '{{ i }}',  {% endfor %}],
+    datasets: [{
+      label: 'Transaction Volume',
+      data: [{% for i in transactions_Volume %}  {{ i }}, {% endfor %}],
+      backgroundColor: [
+      'rgba(255, 99, 132, 0.8)',
+      'rgba(54, 162, 235, 0.8)',
+      'rgba(255, 206, 86, 0.8)',
+      'rgba(75, 192, 192, 0.8)',
+      'rgba(153, 102, 255, 0.8)',
+      'rgba(255, 159, 64, 0.8)',
+      'rgba(240, 120, 50, 0.8)',
+    ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)',
+        'rgba(240, 120, 50, 1)',
+
+      ],  
+          tenssion: 0.4
+            },
+            ]
+        },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+    });
+  </script>
+
+
+{% endblock %}

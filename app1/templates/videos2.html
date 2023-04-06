@@ -1,0 +1,38 @@
+{% extends 'videos1.html' %}
+{% load static %}
+
+{% block title %}Recordings{% endblock %}
+
+{% block extra_head_extended %}
+
+<link rel="stylesheet" href="{% static 'css/video.css'  %}">
+<link rel="stylesheet" href="{% static 'css/video5.css'  %}">
+{% endblock %}
+{% block tr_pro_rec %}
+<a href="{% url 'videos2' %}"><p>> Processed Video</p></a>
+{% block tr_dash__ %}
+{% endblock %}
+{% endblock %}
+
+{% block video2 %}
+<div class="video2">
+    <video class="embed-responsive embed-responsive-16by9" controls="controls">
+        <source src="{{x.processed_video.url}}" type="video/mp4" />
+
+</div>
+
+</video>
+{% endblock %}
+
+{% block buttons  %}
+<div class="buttons">
+    <form action="dashboard_filter"><button type="submit" acti class="btn btn-primary btn-lg">Video Analyzer</button></form>
+    <form action="kpi_dashboard"><button type="submit" acti class="btn btn-primary btn-lg">Business KPI</button></form>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+<script src="{% static 'js/video.js'  %}"> </script>
+<script src="{% static 'js/video2.js'  %}"> </script>
+{% endblock %}

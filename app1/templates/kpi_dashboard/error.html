@@ -1,0 +1,24 @@
+{% extends 'kpi_dashboard/kpi_dashboard.html' %}
+{% load static %}
+
+{% block title %}Error!!!{% endblock %}
+
+{% block extra_head_extended %}
+<link rel="stylesheet" href="{% static 'css/kpi_dashboard1.css'  %}">
+<link rel="stylesheet" href="{% static 'css/kpi_dashboard/security.css'  %}">
+<style>
+    .error{
+        display: flex;
+        justify-content: center;
+        margin-top: 100px;
+    }
+</style>
+{% endblock %}
+
+
+{% block kpi %}
+<div class="error">
+    <h1>Please select Period</h1>
+</div>
+
+{% endblock %}

@@ -1,0 +1,58 @@
+
+body{
+    background-color: rgb(207, 231, 245);
+}
+
+
+.video_container,.anayze_button{ 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+   
+    
+}
+.heading  {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background-color: cornflowerblue;
+}
+h1{
+    color: rgb(0, 0, 0);
+    text-shadow: 5px;
+}
+
+.video_container .videos{
+    width: 1100px;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 50px;
+   
+}
+
+ video {
+    height: 300px;
+    width: 520px; 
+    padding: 0px 20px;
+}
+
+.checkbox{
+    margin-top: 50px;
+    
+}
+
+.button_container{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+ 
+}
+.buttons{
+    display: flex;
+    justify-content: space-evenly;
+
+    margin-left: 25px;
+    margin-top: 30px;
+}
+

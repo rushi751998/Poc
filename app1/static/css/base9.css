@@ -1,0 +1,29 @@
+
+body {
+    width: 1250px;
+}
+
+.nav_container a {
+
+    display: flex; 
+    justify-content: space-between;
+}
+
+.date_{
+    color: rgb(255, 255, 255);
+}
+
+.nav_container img {width: 100px;}
+
+
+
+.nav_container a {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 30px;
+}
+
+a{
+    text-decoration: none;
+    /* margin-left: -100px; */
+  }
