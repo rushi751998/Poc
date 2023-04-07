@@ -15,7 +15,7 @@
      .form h2{
      
         padding-bottom: 25px;
-        font-size: 50px;
+        font-size: 40px;
         color: rgb(255, 255, 255);
      }
      .inputs input{
@@ -40,10 +40,10 @@
 <div class="form">  
     <form action="videos" method="post">
         {% csrf_token %}
-        <h2>Security Footage</h2>
+        <h2>Banking Video Analytics Solution</h2>
         <div class="inputs">
-            <input type="date" name="date">
-            <button type="submit" value="Submit">Submit</button>
+            <input id="date" type="date" name="date">
+            <button  onclick="myFunction()" type="submit" value="Submit">Submit</button>
         </div>        
     </form>
 </div>
@@ -51,11 +51,19 @@
 
 {% block videos %}
 <div class="image">
-    <img src="{% static 'images/R.jpg'%} " width="1250px" height="800px" alt="image no found in static/images">
+    <img src="{% static 'images/R_.jpg'%} " width="1250px" height="1000px" alt="image no found in static/images">
 </div>
 
 {% endblock %}
 
 {% block scripts %}
 <script src="{% static 'js/main.js' %}"></script>
+<script>
+
+    function myFunction() {
+        a = document.getElementById("date") ;
+        localStorage.setItem('date','123')
+      }
+
+</script>
 {% endblock %}

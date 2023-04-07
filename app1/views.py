@@ -61,14 +61,16 @@ def videos2(request):
 def get_param(data):
     data.columns = data.columns.str.replace(" ","_")
     
+    
     gender_values = data.groupby('Gender').count()['Age']
     # print(gender_values)
 
     activity = data.groupby('Suspecious').count()['Customer_ID']
-    age=data.groupby('Age').mean()['Customer_ID']
+    age=data.groupby('Age').mean()['Spend_Time']
+    
     race  = data.groupby('Race').count()['Customer_ID']
     emotion = data.groupby('Emotion').count()['Customer_ID']
-    # print(age)
+    print(age)
 
 
     # it will geive data frame to html
