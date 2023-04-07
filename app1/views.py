@@ -70,7 +70,7 @@ def get_param(data):
     
     race  = data.groupby('Race').count()['Customer_ID']
     emotion = data.groupby('Emotion').count()['Customer_ID']
-    print(age)
+    # print(age)
 
 
     # it will geive data frame to html
