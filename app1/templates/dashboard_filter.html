@@ -4,11 +4,14 @@
 
 {% block title %}Dashboard{% endblock %}
 {% block extra_head %}
-<link rel="stylesheet" href="{% static 'css/dashboard_filter3.css'  %}">
+<link rel="stylesheet" href="{% static 'css/dashboard_filter4.css'  %}">
 <style>
   .container {
     height: 350px;
     overflow: auto;  }
+    .emotion_bargraph h3{
+      margin-left: 50px;
+    }
 </style>
 {% endblock %}
 
@@ -42,7 +45,7 @@
       </div>
 
       <div class="race_piechart">
-        <h3>Race Distrubution </h3>
+        <h3>Race Distribution  </h3>
 
         <canvas id="race_piechart"></canvas>
       </div>
@@ -50,14 +53,14 @@
 
     <div class="age_id_line">
       <h3>Customner Age Analysis</h3>
-      <canvas id="age_id_line"></canvas>
+      <!-- <canvas id="age_id_line"></canvas> -->
     </div>
 
     <div class="container2">
 
 
       <div class="activity_piechart">
-        <h3>Suspicious Monitaring </h3>
+        <h3>Suspicious Monitoring </h3>
         <canvas id="activity_piechart"></canvas>
       </div>
 
@@ -89,12 +92,12 @@
           {% for i in data_html %}
           <tr>
 
-            <td>{{i.Frame_Count}}</td>
+            <td>{{i.Frame_Count }}</td>
             <td>{{i.Customer_ID}}</td>
             <td>{{i.Spend_Time}}</td>
             <td>{{i.Gender}}</td>
-            <td>{{i.Emotion}}</td>
-            <td>{{i.Race}}</td>
+            <td>{{i.Emotion | capfirst}}</td>
+            <td>{{i.Race | capfirst}}</td>
             <td>{{i.Age}}</td>
             <td>{{i.Suspecious}}</td>
 
@@ -136,7 +139,7 @@
   var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: [{% for i in age_id_index %}  '{{ i }}',  {% endfor %}],
+      labels: [{% for i in age_id_index %}  '{{ i | capfirst }}',  {% endfor %}],
   datasets: [{
 
     data: [{% for i in age_id_values %}  {{ i }}, {% endfor %}],
@@ -168,14 +171,14 @@
             beginAtZero: true,
             title:{
               display:true,
-              text: 'Customer ID'
+              text: 'Age'
             }
           },
           y: {
             beginAtZero: true,
             title:{
               display:true,
-              text: 'Age'
+              text: 'Average Time Spend'
             }
           }
         },
@@ -206,24 +209,40 @@
   var myChart = new Chart(ctx, {
     type: 'pie',
     data: {
-      labels: [{% for i in gender %}  '{{ i }}',  {% endfor %}],
+      labels: [{% for i in gender %}  '{{ i | capfirst }}',  {% endfor %}],
   datasets: [{
-    label: 'Gender',
+    label: 'Activity ',
     data: [{% for i in gender_values %}  {{ i }}, {% endfor %}],
     backgroundColor: [
-      'rgba(54, 162, 235, 0.8)',
-      'rgba(255, 206, 86, 0.8)',
+    'rgba(153, 102, 255, 0.8)',
+    'rgba(255, 159, 64, 0.8)',
+
     ],
       borderColor: [
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
+      'rgba(153, 102, 255, 1)',
+      'rgba(255, 159, 64, 1)',
 
       ],
         borderWidth: 3
       }]
   },
   options: {
-    
+    scales: {
+      x: {
+        beginAtZero: true,
+        title:{
+          display:true,
+          text: ''
+        }
+      },
+      y: {
+        beginAtZero: true,
+        title:{
+          display:true,
+          text: ''
+        }
+      }
+    },
     plugins: {
       legend: {
         display: true,
@@ -245,31 +264,45 @@
 });
 </script>
 
-
 <script>
   var ctx = document.getElementById('race_piechart').getContext('2d');
   var myChart = new Chart(ctx, {
-    type: 'doughnut',
+    type: 'pie',
     data: {
-      labels: [{% for i in race_id_index %}  '{{ i }}',  {% endfor %}],
+      labels: [{% for i in race_id_index %}  '{{ i | capfirst }}',  {% endfor %}],
   datasets: [{
-    label: 'Race',
+    label: 'Activity ',
     data: [{% for i in race_id_values %}  {{ i }}, {% endfor %}],
     backgroundColor: [
-      'rgba(153, 102, 255, 0.8)',
-      'rgba(255, 159, 64, 0.8)',
-      'rgba(240, 120, 50, 0.8)',
+    'rgba(255, 99, 132, 0.8)',
+    'rgba(54, 162, 235, 0.8)',
+
     ],
       borderColor: [
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)',
-        'rgba(240, 120, 50, 1)',
+      'rgba(255, 99, 132, 1)',
+      'rgba(54, 162, 235, 1)',
 
       ],
         borderWidth: 3
       }]
   },
   options: {
+    scales: {
+      x: {
+        beginAtZero: true,
+        title:{
+          display:true,
+          text: ''
+        }
+      },
+      y: {
+        beginAtZero: true,
+        title:{
+          display:true,
+          text: ''
+        }
+      }
+    },
     plugins: {
       legend: {
         display: true,
@@ -296,7 +329,7 @@
   var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: [{% for i in emotions_lables %}  '{{ i }}',    {% endfor %}],
+      labels: [{% for i in emotions_lables %}  '{{ i | capfirst }}',    {% endfor %}],
   datasets: [{
     label: 'Emotions',
     data: [{% for i in emotions_values %}  {{ i }}, {% endfor %}],
@@ -417,7 +450,7 @@
   var myChart = new Chart(ctx, {
     type: 'line',
     data: {
-      labels: [{% for i in age_id_index %}  '{{ i }}',    {% endfor %}],
+      labels: [{% for i in age_id_index %}  '{{ i | capfirst }}',    {% endfor %}],
   datasets: [{
     label: 'Number of People',
     data: [{% for i in age_id_values %}  {{ i }}, {% endfor %}],

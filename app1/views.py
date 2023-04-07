@@ -65,7 +65,7 @@ def get_param(data):
     # print(gender_values)
 
     activity = data.groupby('Suspecious').count()['Customer_ID']
-    age=data.groupby('Customer_ID').sum()['Age']
+    age=data.groupby('Age').mean()['Customer_ID']
     race  = data.groupby('Race').count()['Customer_ID']
     emotion = data.groupby('Emotion').count()['Customer_ID']
     # print(age)
