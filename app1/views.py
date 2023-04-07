@@ -62,7 +62,7 @@ def get_param(data):
     data.columns = data.columns.str.replace(" ","_")
     
     
-    gender_values = data.groupby('Gender').count()['Age']
+    gender_values = data.groupby(['Gender']).count()['Customer_ID']
     # print(gender_values)
 
     activity = data.groupby('Suspecious').count()['Customer_ID']
@@ -223,7 +223,7 @@ def primer_customer(request):
         # print(primer_customers['Emotion'].unique())
         # print(per_happy_primum)
         parms = { 
-            'kpi': 'Primer Customers',
+            'kpi': 'Prime Customers',
             'date':date,
             'total_primer':total_primer.values,
             'total_customer':total_customer.values,
