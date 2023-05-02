@@ -27,8 +27,8 @@ h1 {
 
 .box {
     position: relative;
-    width: 280px;
-    height: 300px;
+    width: 300px;
+    height: 320px;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -6,7 +6,7 @@
 
 
 {% block extra_head_extended %}
-<link rel="stylesheet" href="{% static 'css/kpi_dashboard1/kpi_common.css'  %}"> 
+<link rel="stylesheet" href="{% static 'css/kpi_dashboard1/kpi_common1.css'  %}"> 
 <style>
   .container1{
     display: flex;
@@ -59,7 +59,7 @@
     <div class="container1">
 <div class="left">
   <div class="box">
-    <h2 class="text">Time Spend (Avg)</h2>
+    <h3 class="text">Time Spend (Avg)</h3>
 
     <div class="percent">
       <svg>
@@ -67,7 +67,7 @@
         <circle class="avgstay_circle" cx="70" cy="70" r="70"></circle>
       </svg>
       <div class="number">
-        <h2 id="cv">{{avg_stay}}Sec</h2>
+        <h3 id="cv">{{avg_stay}}Sec</h3>
       </div>
     </div>
 
@@ -76,7 +76,7 @@
 </div>
 <div class="right">
   <div class="box">
-    <h2 class="text">Happy Customers  </h2>
+    <h3 class="text">Happy Customers</h3>
 
     <div class="percent">
       <svg>
@@ -84,7 +84,7 @@
         <circle class="unfoot_circle" cx="70" cy="70" r="70"></circle>
       </svg>
       <div class="number">
-        <h2 id="cv">{{per_happy_primum}}%</h2>
+        <h3 id="cv">{{per_happy_primum}}%</h3>
       </div>
     </div>
 
