@@ -20,12 +20,15 @@
     .nav2{
       display: flex;
       height: 30px;
-      align-items: baseline;
+      align-items: center;
       background-color: rgb(49, 49, 49); 
      }
     .tracker{
       margin-left: 0px;
       display: flex; 
+      justify-content: center;
+      align-items: center;
+      margin-top: 13px;
     }
     .dash_button{
       margin-left: 10px;
@@ -61,11 +64,11 @@
     </nav>
   </div>
   <div class="nav2">
+    <div class="dash_button">
+      {% block dash_button %}
+      {% endblock %}
+    </div>
     <div class="tracker">
-      <div class="dash_button">
-        {% block dash_button %}
-        {% endblock %}
-      </div>
       <a href="{% url 'index' %}" ><p>Home</p></a>
       {% block tr_rec %}
       {% endblock %}
